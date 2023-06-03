@@ -357,15 +357,13 @@
 .filter-bar{
   display: flex;
   flex-direction: column;
-
   padding: 10px;
   gap: 10px;
- 
   position: fixed;
   height: 100%;
   flex-wrap: wrap;
   width: 300px;
-  box-shadow: 2px 2px 12px 1px rgba(173, 166, 166, 0.426) ;
+  box-shadow: 2px 2px 1px 1px brown ;
   
 }
 
@@ -448,7 +446,6 @@
 
 
 .innerFilter , .side-innerFlter{
-  /* padding: 10px; */
     margin-top: 40px;
     margin-left: 10px;
   

@@ -1,5 +1,4 @@
 
-import MenuIcon from '@mui/icons-material/Menu';
 import { Button } from '@mui/material'
 import React, { useContext } from 'react'
 import { AppContext } from '../contexts/AppContext'
