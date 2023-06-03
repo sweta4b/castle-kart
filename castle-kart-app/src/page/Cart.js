@@ -100,6 +100,8 @@ export default function Cart() {
                                                     sx={{
                                                         backgroundColor: 'brown',
                                                         width: "250px",
+                                                        gap:'10px',
+                                                        fontSize:'small',
                                                         "&": {
                                                             ":hover": {
                                                                 backgroundColor: 'black'
@@ -110,7 +112,7 @@ export default function Cart() {
                                                     Remove from Cart
                                                 </Button>
                                                 {wishListItems.includes(item) ? <Button variant="contained" onClick={() => navigate("/wishlist")} sx={{
-                                                    backgroundColor: 'brown', width: "250px",
+                                                    backgroundColor: 'brown', width: "250px", gap:'10px',fontSize:'small',
                                                     "&": {
                                                         ":hover": {
                                                             backgroundColor: 'black'
@@ -121,7 +123,7 @@ export default function Cart() {
                                                     Already in wishList
                                                 </Button> :
                                                     <Button variant="contained" onClick={() => addToWishList(item)} sx={{
-                                                        backgroundColor: 'brown', width: "250px",
+                                                        backgroundColor: 'brown', width: "250px", gap:'10px', fontSize:'small',
                                                         "&": {
                                                             ":hover": {
                                                                 backgroundColor: 'black'

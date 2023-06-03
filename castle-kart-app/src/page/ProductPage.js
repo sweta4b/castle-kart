@@ -17,7 +17,7 @@ function ProductPage() {
   const { selectedCategories, sorting,
     products, searchTerm,
     setSelectedCategories,
-    ratingValue,showSidenav} =
+    ratingValue, showSidenav } =
     useContext(AppContext)
 
 
@@ -27,10 +27,10 @@ function ProductPage() {
     }
   }, [category]);
 
- 
+
 
   let filteredProducts = products;
- 
+
 
   if (selectedCategories.length > 0) {
     filteredProducts = filteredProducts.filter((product) => selectedCategories.includes(product.category));
@@ -39,34 +39,37 @@ function ProductPage() {
     (product) => product.rating.rate >= Number(ratingValue));
   filteredProducts.filter((product) =>
     searchTerm === "" || product.title.toLowerCase().includes(searchTerm.toLowerCase()))
-    
+
   if (sorting === 'highToLow') {
     filteredProducts = filteredProducts.sort((a, b) => b.price - a.price);
   } else if (sorting === 'lowToHigh') {
     filteredProducts = filteredProducts.sort((a, b) => a.price - b.price);
   }
-    if (products.length === 0) return <Loader />
-    return (
+  if (products.length === 0) return <Loader />
+  return (
     <>
 
       <Header />
-      <SideNav/>
+      <SideNav />
       <div className='product-container' >
         <Filters className='filter-container' />
-        <Container sx={{ py: 8, display: showSidenav ? 'none' : 'block' }} maxWidth="lg" className="display-product" >
+        <Container sx={{ py: 8, display: showSidenav ? 'none' : 'block' }}
+         maxWidth="lg" className="display-product" >
           <Grid container spacing={4}>
             {filteredProducts.filter((product) =>
-    searchTerm === "" || product.title.toLowerCase().includes(searchTerm.toLowerCase())).map((product) => (
-              <>
-              <ProductContainer product={product} />
-              </>
-            ))}
+              searchTerm === "" || product.title.toLowerCase()
+              .includes(searchTerm.toLowerCase()))
+              .map((product) => (
+                <>
+                  <ProductContainer product={product} />
+                </>
+              ))}
           </Grid>
         </Container>
       </div>
     </>
-    )
-  
+  )
+
 }
 
 export default ProductPage 

@@ -76,7 +76,7 @@ function WishList() {
                         Rating:
                         <Rating readOnly precision={0.5} value={rating.rate} />
                         <Button variant="contained" onClick={() => removeFromWishList(id)} sx={{
-                          backgroundColor: 'brown', width: "250px",
+                          backgroundColor: 'brown', width: "250px", gap:'10px', fontSize:'small',
                           "&": {
                             ":hover": {
                               backgroundColor: 'black'
@@ -87,7 +87,7 @@ function WishList() {
                           Remove from Wishlist
                         </Button>
                         {isInCart(item.id) ? <Button variant="contained" onClick={() => moveToCart(item)} sx={{
-                          backgroundColor: 'brown', width: "250px",
+                          backgroundColor: 'brown', width: "250px", gap:'10px',fontSize:'small',
                           "&": {
                             ":hover": {
                               backgroundColor: 'black'
@@ -98,7 +98,8 @@ function WishList() {
                           Already in cart
                         </Button> :
                           <Button variant="contained" onClick={() => moveToCart(item)} sx={{
-                            backgroundColor: 'brown', width: "250px",
+                            backgroundColor: 'brown', width: "250px", gap:'10px',
+                            fontSize:'small',
                             "&": {
                               ":hover": {
                                 backgroundColor: 'black'

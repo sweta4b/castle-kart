@@ -25,7 +25,8 @@ function ProductContainer({ product }) {
     return (
         <Grid item key={product.id} xs={12} sm={6} md={3} >
             <Card className="card"
-                sx={{ height: "100%", display: "flex", flexDirection: "column"
+                sx={{ height: "100%", display: "flex", flexDirection: "column",
+                
                }}>
                 <IconButton sx={{ alignSelf: 'flex-end' }} onClick={() => handleWishList(product)} >
                     <FavoriteIcon className="favorite" sx={{ color: wishListItems.includes(product) ? 'brown' : "" }} />
@@ -34,17 +35,23 @@ function ProductContainer({ product }) {
                     component="img"
                     sx={{
                         alignSelf: "center",
-                        width: theme.spacing(30),
-                        height: theme.spacing(30),
+                        width: theme.spacing(20),
+                        height: theme.spacing(20),
                         objectFit: "contain",
                         pt: theme.spacing(),
+                        "&": {
+                            ":hover" : {
+                                transform: 'scale(1.2, 1.2) ',
+                                cursor:'pointer'
+                            }
+                        }
                     }}
                     image={product.image}
                     alt={product.title}
                 />
                 <CardContent >
                     <Typography
-                        variant="h5"
+                        variant="h6"
                         component="h2"
                         gutterBottom
                         sx={{
@@ -57,8 +64,8 @@ function ProductContainer({ product }) {
                     >
                         {product.title}
                     </Typography>
-                    <Typography paragraph fontSize="large">
-                        <b>$</b> {product.price}
+                    <Typography paragraph fontSize="snall">
+                        <b>$ {product.price}</b> 
                     </Typography>
                     <Rating readOnly precision={0.5} value={product.rating.rate} sx={{zIndex: 1000}}/>
                 </CardContent>
@@ -68,6 +75,8 @@ function ProductContainer({ product }) {
                     {isInCart(product.id) ?
                         <Button variant="contained" onClick={() => navigate("/cart")} sx={{
                             backgroundColor: 'brown',
+                            fontSize:'small',
+                            gap:'10px',
                             "&": {
                                 ":hover": {
                                     backgroundColor: 'black'
@@ -79,7 +88,8 @@ function ProductContainer({ product }) {
                         </Button> :
                         <Button variant="contained" onClick={() => addToCart(product)} sx={{
                             backgroundColor: 'brown', 
-                            
+                            fontSize:'small',
+                            gap:'10px',
                             "&": {
                                 ":hover": {
                                     backgroundColor: 'black'
@@ -90,10 +100,6 @@ function ProductContainer({ product }) {
                             Add to Cart
                         </Button>}
                 </CardActions>
-                <Button sx={{ color: 'brown' }} className="lineUp"
-                    onClick={() => navigate(`/product/${product.id}`)}>
-                    Quick View
-                </Button>
             </Card>
         </Grid>
     )
