@@ -12,7 +12,7 @@ export const AppContext = createContext();
 export default function AppProvider({ children }) {
 
     const [cartItems, setCartItems] = useState([]);
-    const [selectedCategory, setSelectedCategory] = useState('');
+    // const [selectedCategory, setSelectedCategory] = useState('');
     const [categories, setCategories] = useState([]);
     const [products, setProducts] = useState([]);
     const [wishListItems, setWishListItems] = useState([]);
@@ -155,8 +155,8 @@ export default function AppProvider({ children }) {
     return (
         <AppContext.Provider
             value={{
-                selectedCategory,
-                setSelectedCategory,
+                // selectedCategory,
+                // setSelectedCategory,
                 addToCart,
                 removeFromCart,
                 cartItems,

@@ -5,7 +5,7 @@ import { AppContext } from '../contexts/AppContext'
 function LandingPage() {
 
     const navigate = useNavigate()
-    const { setSelectedCategory, categories } = useContext(AppContext)
+    const { categories } = useContext(AppContext)
 
     // const goToCategory = (category) => {
     //     setSelectedCategory(category)
