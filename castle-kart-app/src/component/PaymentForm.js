@@ -12,7 +12,6 @@ export default function PaymentsForm() {
   
   function handleChange(event) {
     const { name, value } = event.target ?? {};
-    console.log(name, value);
     updatePayment({ [name]: value });
   }
   return (
