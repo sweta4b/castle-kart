@@ -22,6 +22,7 @@ let checkoutState = {
   };
   
   const updatePayment = (payload) => {
+    payload === null ? alert('Enter reqired field') : 
     checkoutState.payment = { ...checkoutState.payment, ...payload };
   };
   
