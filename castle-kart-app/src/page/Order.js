@@ -2,6 +2,7 @@
 import { Box, Button, Container, Paper, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import AddressForm from '../component/AddressForm';
 import Header from '../component/Header'
 import PaymentsForm from '../component/PaymentForm';
@@ -25,7 +26,7 @@ function getStepContent(activeStep) {
 }
 
 function Order() {
-  const { clearCart } = useContext(AppContext)
+  const { clearCart, isSelected } = useContext(AppContext)
   const [activeStep, setActiveStep] = useState(0);
   const navigate = useNavigate()
 
@@ -37,7 +38,11 @@ function Order() {
   }, [activeStep, clearCart]);
 
   function handleNext() {
-    setActiveStep(activeStep + 1);
+    isSelected ? 
+    setActiveStep(activeStep + 1) : toast("Select Address", {
+      position: 'bottom-right',
+      autoClose: 2000,
+  });
   }
   function handleBack() {
     setActiveStep(activeStep - 1);
