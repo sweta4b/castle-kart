@@ -1,7 +1,6 @@
 import { Avatar, Box, Button, Container, CssBaseline, Grid, TextField, Typography } from '@mui/material';
 import React, { useState } from 'react'
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import VisibilityIcon from '@mui/icons-material/Visibility';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 
