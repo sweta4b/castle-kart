@@ -7,6 +7,10 @@ function ShowAllAdress() {
 
   const { userAddress, setUserAddress } = useContext(AppContext)
   const [isActive, setIsActive] = useState(false)
+  const [updateAddress, setUpdateAddress] = useState({});
+  const [updateIndex, setUpdateIndex] = useState(-1);
+
+ 
   const { user } = useAuth()
 
   function deleteAddress1(name) {
@@ -15,8 +19,8 @@ function ShowAllAdress() {
 
   function addNewAdress(event) {
     event.preventDefault();
-    const { firstName, lastName, zipCode, address2, address1, city, mobileNo, country } = event.target
-
+    const { firstName, lastName, zipCode, address2, address1, city, mobileNo, country } = event.target;
+  
     const newAddress = {
       firstName: firstName.value,
       lastName: lastName.value,
@@ -26,9 +30,31 @@ function ShowAllAdress() {
       city: city.value,
       country: country.value,
       mobileNo: mobileNo.value
+    };
+  
+    if (updateIndex !== -1) {
+      setUserAddress((userAddress) => {
+        const updatedAddresses = [...userAddress];
+        updatedAddresses[updateIndex] = newAddress;
+        return updatedAddresses;
+      });
+      setUpdateAddress({});
+      setUpdateIndex(-1);
+    } else {
+      setUserAddress((userAddress) => [...userAddress, newAddress]);
     }
-    setUserAddress((userAddress) => [...userAddress, newAddress])
+  
+    // Reset form fields
+    event.target.reset();
   }
+  
+
+  function updateAddressDetails(index) {
+    setIsActive(!isActive)
+    setUpdateAddress(userAddress[index]);
+    setUpdateIndex(index);
+  }
+  
 
   return (<>
     <Header />
@@ -44,16 +70,17 @@ function ShowAllAdress() {
       <div className='adress-detail' >
 
         {
-          userAddress.map((address) => (
-            <>
+          userAddress.map((address, index) => (
+            <div id={address.firstName}>
               <h4>{address.firstName} {address.lastName}</h4>
               <p>{address.address1}, {address.address2}</p>
               <p>{address.city} {address.zipCode}, {address.country}</p>
               <p>{address.mobileNo}</p>
               <div className='account-btn'>
                 <button onClick={() => deleteAddress1(address.firstName)} className='update'>Delete</button>
+                <button onClick={() => updateAddressDetails(index)} className='update'>Update</button>
               </div>
-            </>
+            </div>
           ))
         }
       </div>
@@ -67,11 +94,11 @@ function ShowAllAdress() {
             required
             name='name'
             id='firstName'
+            value={updateAddress.firstName || ''}
             style={{
               width: '90%',
               padding: '5px'
-
-            }}
+            }}  
           />
         </div>
         <div className='inputArea'>
@@ -79,7 +106,7 @@ function ShowAllAdress() {
             required
             name='name'
             id='lastName'
-
+            value={updateAddress.lastName || ''}
             style={{
               width: '90%',
               padding: '5px'
@@ -152,11 +179,9 @@ function ShowAllAdress() {
               padding: '5px'
             }} />
         </div>
-        <button className='update2' onClick={() => setIsActive(!isActive)}>Save</button>
-
+        <button className='update2' onClick={() => setIsActive(!isActive)}>{updateIndex !== -1 ? 'Update' : 'Save'}</button>
       </form>
     </div>
-
   </>
   )
 }
