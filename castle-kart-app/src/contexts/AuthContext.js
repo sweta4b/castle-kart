@@ -2,6 +2,8 @@ import { useContext } from "react";
 import { useState, createContext, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 const AuthContext = createContext();
 
@@ -65,12 +67,17 @@ function useProvideAuth() {
         localStorage.setItem("token", encodedToken);
         localStorage.setItem("user", JSON.stringify(user));
         navigate("/");
+        toast("Login successfully", {
+          position: 'bottom-right',
+          autoClose: 2000,
+      });
       } else {
         navigate("/login");
       }
     } catch (error) {
       alert("Invalid email or password");
     }
+    
   };
 
   const signOutUser = () => {
