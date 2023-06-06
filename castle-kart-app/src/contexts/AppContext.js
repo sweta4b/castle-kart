@@ -23,8 +23,9 @@ export default function AppProvider({ children }) {
     const [userData, setUserData] = useState({});
     const[showSidenav, setShowSidenav] = useState(false)
     const navigate = useNavigate();
+    const [isSelected, setIsSelected] = useState(false);
    
-    
+
 
 
     useEffect(() => {
@@ -182,7 +183,9 @@ export default function AppProvider({ children }) {
                 handleSortingChange,
                 showSearchedProduct,
                 showSidenav,
-                toggleSideNav
+                toggleSideNav,
+                isSelected,
+                setIsSelected
             }}
         >
             {children}
