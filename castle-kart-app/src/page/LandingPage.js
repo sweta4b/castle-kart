@@ -7,10 +7,10 @@ function LandingPage() {
     const navigate = useNavigate()
     const { setSelectedCategory, categories } = useContext(AppContext)
 
-    const goToCategory = (category) => {
-        setSelectedCategory(category)
-        navigate("/product")
-    }
+    // const goToCategory = (category) => {
+    //     setSelectedCategory(category)
+    //     navigate("/product")
+    // }
 
     return (
         <div>

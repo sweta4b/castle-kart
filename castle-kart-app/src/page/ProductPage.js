@@ -25,7 +25,7 @@ function ProductPage() {
     if (category) {
       setSelectedCategories([category])
     }
-  }, [category]);
+  }, [category, setSelectedCategories]);
 
 
 

@@ -34,7 +34,7 @@ function Order() {
       clearCart();
       clearCheckoutInformation();
     }
-  }, [activeStep]);
+  }, [activeStep, clearCart]);
 
   function handleNext() {
     setActiveStep(activeStep + 1);
