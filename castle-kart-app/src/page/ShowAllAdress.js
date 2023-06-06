@@ -4,7 +4,7 @@ import { AppContext } from '../contexts/AppContext'
 import { useAuth } from '../contexts/AuthContext'
 
 function ShowAllAdress() {
-  
+
   const { userAddress, setUserAddress } = useContext(AppContext)
   const [isActive, setIsActive] = useState(false)
   const { user } = useAuth()
@@ -27,25 +27,22 @@ function ShowAllAdress() {
       country: country.value,
       mobileNo: mobileNo.value
     }
-   
-      setUserAddress((userAddress) => [...userAddress, newAddress])
-   
+    setUserAddress((userAddress) => [...userAddress, newAddress])
   }
-
- 
 
   return (<>
     <Header />
 
     <div className="account-container" style={{ display: isActive ? 'none' : 'block' }}>
       <h2 className='account'>My Account</h2>
-      <h3>Account Details </h3>
-      <div className='account-detail' >
-        <h4>{user.firstName} {user.lastName}</h4>
-        <h4>{user.email}</h4>
+      <h3 style={{ textDecoration: 'underline' }}>Account Details </h3>
+      <div className='account-detail' style={{ marginTop: '20px' }} >
+        <h4>Name: {user.firstName} {user.lastName}</h4>
+        <h4>Email: {user.email}</h4>
       </div>
-      <h3>Address Details</h3>
+      <h3 style={{ marginTop: '20px', textDecoration: 'underline' }}>Address Details</h3>
       <div className='adress-detail' >
+
         {
           userAddress.map((address) => (
             <>
@@ -156,6 +153,7 @@ function ShowAllAdress() {
             }} />
         </div>
         <button className='update2' onClick={() => setIsActive(!isActive)}>Save</button>
+
       </form>
     </div>
 
