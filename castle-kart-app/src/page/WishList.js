@@ -1,14 +1,12 @@
 import { Favorite, ShoppingCartSharp } from '@mui/icons-material';
 import { Box, Button, Card, CardContent, CardMedia, Container, Grid, Rating, Typography, useTheme } from '@mui/material'
 import React, { useContext } from 'react'
-// import { useNavigate } from 'react-router-dom';
 import Header from '../component/Header';
 import { AppContext } from '../contexts/AppContext';
 
 function WishList() {
 
   const theme = useTheme();
-  // const navigate = useNavigate();
   const { wishListItems, removeFromWishList, addToCart, isInCart } = useContext(AppContext)
 
   const moveToCart = (item) => {
@@ -95,7 +93,7 @@ function WishList() {
                           }
                         }}>
                           <ShoppingCartSharp />
-                          Already in cart
+                          Go to cart
                         </Button> :
                           <Button variant="contained" onClick={() => moveToCart(item)} sx={{
                             backgroundColor: 'brown', width: "250px", gap:'10px',
