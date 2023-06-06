@@ -2,7 +2,7 @@ import {
   Container,
   Grid,
 } from "@mui/material";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "../component/Header";
 import { AppContext } from "../contexts/AppContext";
 import Filters from "../component/Filters";
@@ -14,17 +14,21 @@ import SideNav from "../component/SideNav";
 
 function ProductPage() {
   const { category } = useParams()
+  const [loading, setLoading] = useState(true);
   const { selectedCategories, sorting,
     products, searchTerm,
     setSelectedCategories,
     ratingValue, showSidenav } =
     useContext(AppContext)
 
-
   useEffect(() => {
     if (category) {
       setSelectedCategories([category])
     }
+    setTimeout(() => {
+      setLoading(false)
+  }, 1000);
+
   }, [category, setSelectedCategories]);
 
 
@@ -50,11 +54,15 @@ function ProductPage() {
     <>
 
       <Header />
+      {
+        loading ? <div className="loader"></div> :
+      <>
       <SideNav />
       <div className='product-container' >
         <Filters className='filter-container' />
         <Container sx={{ py: 8, display: showSidenav ? 'none' : 'block' }}
          maxWidth="lg" className="display-product" >
+          <h3 style={{marginBottom:'10px'}}>Showing Total Products : <h4>({filteredProducts.length} products)</h4></h3>
           <Grid container spacing={4}>
             {filteredProducts.filter((product) =>
               searchTerm === "" || product.title.toLowerCase()
@@ -67,6 +75,8 @@ function ProductPage() {
           </Grid>
         </Container>
       </div>
+      </>
+}
     </>
   )
 
