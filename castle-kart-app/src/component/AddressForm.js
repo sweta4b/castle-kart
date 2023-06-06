@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
@@ -9,6 +9,8 @@ import { AppContext } from "../contexts/AppContext";
 
 export default function AddressForm() {
   const { userAddress, setUserData, userData } = useContext(AppContext)
+  const [selectedAddressIndex, setSelectedAddressIndex] = useState(null)
+ 
 
 
   function handleChange(event) {
@@ -20,8 +22,12 @@ export default function AddressForm() {
 
   function fillTheAddresForm(index) {
     const selectedAddress = userAddress[index]
+    setSelectedAddressIndex(index);
     setUserData(selectedAddress)
   }
+
+  
+  
 
   return (
     <>
@@ -39,7 +45,7 @@ export default function AddressForm() {
               fullWidth
               autoComplete="given-name"
               variant="standard"
-              defaultValue={userData.firstName ?? ""}
+              value={selectedAddressIndex !== null ? userAddress[selectedAddressIndex].firstName : userData.firstName || ""}
               onChange={handleChange}
             />
           </Grid>
@@ -52,13 +58,13 @@ export default function AddressForm() {
               fullWidth
               autoComplete="family-name"
               variant="standard"
-              defaultValue={userData.lastName ?? ""}
+              value={selectedAddressIndex !== null ? userAddress[selectedAddressIndex].lastName : userData.lastName || ""}
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={12}>
             <TextField
-              defaultValue={userData.address1 ?? ""}
+             value={selectedAddressIndex !== null ? userAddress[selectedAddressIndex].address1 : userData.address1 || ""}
               required
               id="address1"
               name="address1"
@@ -70,7 +76,7 @@ export default function AddressForm() {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              defaultValue={userData.address2 ?? ""}
+             value={selectedAddressIndex !== null ? userAddress[selectedAddressIndex].address2 : userData.address2 || ""}
               required
               id="address2"
               name="address2"
@@ -82,7 +88,7 @@ export default function AddressForm() {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              defaultValue={userData.city ?? ""}
+             value={selectedAddressIndex !== null ? userAddress[selectedAddressIndex].city : userData.city || ""}
               required
               id="city"
               name="city"
@@ -94,7 +100,7 @@ export default function AddressForm() {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              defaultValue={userData.zipCode ?? ""}
+             value={selectedAddressIndex !== null ? userAddress[selectedAddressIndex].zipCode : userData.zipCode || ""}
               required
               id="zipCode"
               name="zipCode"
@@ -106,7 +112,7 @@ export default function AddressForm() {
           </Grid>
           <Grid item xs={12}>
             <TextField
-              defaultValue={userData.country ?? ""}
+              value={selectedAddressIndex !== null ? userAddress[selectedAddressIndex].country : userData.country || ""}
               required
               id="country"
               name="country"
@@ -120,6 +126,7 @@ export default function AddressForm() {
       </Box>
       <Typography variant="h6" sx={{ my: 2 }}>Select address</Typography>
       {userAddress.map((useraddress, index) => (
+        <>
         <div className="selectedAddress">
           <label><input type='radio' onChange={() => fillTheAddresForm(index)} name="name" />
             {useraddress.firstName} {useraddress.lastName},
@@ -129,7 +136,10 @@ export default function AddressForm() {
           </label>
           <p>{useraddress.mobileNo}</p>
         </div>
+         </>
       ))}
+
+     
     </>
   );
 }
