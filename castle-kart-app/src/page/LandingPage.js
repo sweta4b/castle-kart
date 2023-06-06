@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { AppContext } from '../contexts/AppContext'
 
@@ -6,14 +6,19 @@ function LandingPage() {
 
     const navigate = useNavigate()
     const { categories } = useContext(AppContext)
+    const [loading, setLoading] = useState(true);
 
-    // const goToCategory = (category) => {
-    //     setSelectedCategory(category)
-    //     navigate("/product")
-    // }
+    useEffect(() => {
+        setTimeout(() => {
+            setLoading(false)
+        }, 1000);
+    },[])
 
-    return (
+
+    return ( 
         <div>
+            {loading ? <div className='loader'></div> : 
+            <>
             <div className="conatiner">
                 <div className="img-container">
                     <div className="background-img"></div>
@@ -68,7 +73,10 @@ function LandingPage() {
                     <p className="paragraph-last">Sweta @ 2023</p>
                 </section>
             </footer>
+            </>
+}
         </div>
+        
     )
 }
 
