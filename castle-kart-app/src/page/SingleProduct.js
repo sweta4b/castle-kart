@@ -74,6 +74,7 @@ function SingleProduct() {
                       sx={{
                         backgroundColor: 'brown', width: "200px",
                         fontSize:'12px',
+                        gap:'10px',
                         "&": {
                           ":hover": {
                             backgroundColor: 'black'
@@ -86,6 +87,7 @@ function SingleProduct() {
                       sx={{
                         backgroundColor: 'brown', width: "200px",
                         fontSize:'12px',
+                        gap:'10px',
                         "&": {
                           ":hover": {
                             backgroundColor: 'black'
@@ -99,6 +101,7 @@ function SingleProduct() {
                       sx={{
                         backgroundColor: 'brown', width: "200px",
                         fontSize:'12px',
+                        gap:'10px',
                         "&": {
                           ":hover": {
                             backgroundColor: 'black'
@@ -111,6 +114,7 @@ function SingleProduct() {
                       sx={{
                         backgroundColor: 'brown', width: "200px",
                         fontSize:'12px',
+                        gap:'10px',
                         "&": {
                           ":hover": {
                             backgroundColor: 'black'
