@@ -16,7 +16,7 @@ function useProvideAuth() {
   const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem("user");
     console.log(localStorage.getItem('user'))
-    
+    console.log(storedUser)  
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
@@ -36,7 +36,7 @@ function useProvideAuth() {
         email: email,
         password: password
       });
-      
+      console.log(response.data)
       const { encodedToken, user } = response.data;
       setToken(encodedToken);
       setUser(user);
