@@ -486,6 +486,7 @@
   margin-top: 50px;
   margin-bottom: 20px;
   color: brown;
+  text-decoration: underline;
 }
 
 
@@ -497,6 +498,8 @@
   color: white;
   border-radius: 5px;
   margin-bottom: 10px;
+  padding: 5px;
+  cursor: pointer;
 }
 
 .account-btn{
@@ -520,16 +523,17 @@
 .account-detail, .adress-detail{
   text-align: left;
   margin-left: 10px;
+  line-height: 2;
 }
 
 .update2{
   border: none;
-  margin: auto;
   background-color: brown;
   font-size: small;
   color: white;
   padding: 2px 10px;
   border-radius: 5px;
+  
 }
 
 .newAddress{
