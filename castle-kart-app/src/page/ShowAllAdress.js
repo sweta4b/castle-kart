@@ -7,7 +7,6 @@ function ShowAllAdress() {
 
   const { userAddress, setUserAddress } = useContext(AppContext)
   const [isActive, setIsActive] = useState(false)
-  const [updateAddress, setUpdateAddress] = useState({});
   const [updateIndex, setUpdateIndex] = useState(-1);
 
  
@@ -38,7 +37,6 @@ function ShowAllAdress() {
         updatedAddresses[updateIndex] = newAddress;
         return updatedAddresses;
       });
-      setUpdateAddress({});
       setUpdateIndex(-1);
     } else {
 
@@ -49,7 +47,6 @@ function ShowAllAdress() {
   
   function updateAddressDetails(index) {
     setIsActive(!isActive)
-    setUpdateAddress(userAddress[index]);
     setUpdateIndex(index);
   }
   
