@@ -56,7 +56,7 @@ function Filters() {
                 </div>
                 <hr />
                 <div className='ratingFilter'>
-                    <h4>Sort by rating</h4>
+                    <h4>Filter by rating</h4>
                     <input type='range' min='0' max='5' step='0.2' value={ratingValue} onChange={(event) => handleRating(event)} />
                 </div>
                 <hr />
