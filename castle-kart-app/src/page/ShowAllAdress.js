@@ -41,14 +41,12 @@ function ShowAllAdress() {
       setUpdateAddress({});
       setUpdateIndex(-1);
     } else {
+
       setUserAddress((userAddress) => [...userAddress, newAddress]);
     }
-  
-    // Reset form fields
     event.target.reset();
   }
   
-
   function updateAddressDetails(index) {
     setIsActive(!isActive)
     setUpdateAddress(userAddress[index]);
@@ -94,7 +92,6 @@ function ShowAllAdress() {
             required
             name='name'
             id='firstName'
-            value={updateAddress.firstName || ''}
             style={{
               width: '90%',
               padding: '5px'
@@ -105,8 +102,7 @@ function ShowAllAdress() {
           <input placeholder='Lastname'
             required
             name='name'
-            id='lastName'
-            value={updateAddress.lastName || ''}
+            id='lastName' 
             style={{
               width: '90%',
               padding: '5px'
@@ -117,7 +113,6 @@ function ShowAllAdress() {
             required
             name='address1'
             id='address1'
-
             style={{
               width: '90%',
               padding: '5px'
@@ -128,7 +123,6 @@ function ShowAllAdress() {
             required
             name='address2'
             id='address2'
-
             style={{
               width: '90%',
               padding: '5px'
@@ -139,7 +133,6 @@ function ShowAllAdress() {
             required
             name='city'
             id='city'
-
             style={{
               width: '90%',
               padding: '5px'
@@ -150,7 +143,6 @@ function ShowAllAdress() {
             required
             name='zipCode'
             id='zipCode'
-
             style={{
               width: '90%',
               padding: '5px'
@@ -161,7 +153,6 @@ function ShowAllAdress() {
             required
             name='country'
             id='country'
-
             style={{
               width: '90%',
               padding: '5px'
@@ -173,7 +164,6 @@ function ShowAllAdress() {
             required
             name='mobileno'
             id='mobileNo'
-
             style={{
               width: '90%',
               padding: '5px'
