@@ -13,73 +13,77 @@ import SideNav from "../component/SideNav";
 
 
 function ProductPage() {
-  const { category } = useParams()
+  const { category } = useParams();
   const [loading, setLoading] = useState(true);
-  const { selectedCategories, sorting,
-    products, searchTerm,
+  const {
+    selectedCategories,
+    sorting,
+    products,
+    searchTerm,
     setSelectedCategories,
-    ratingValue, showSidenav } =
-    useContext(AppContext)
+    ratingValue,
+    showSidenav
+  } = useContext(AppContext);
 
   useEffect(() => {
     if (category) {
-      setSelectedCategories([category])
+      setSelectedCategories([category]);
     }
     setTimeout(() => {
-      setLoading(false)
-  }, 1000);
-
+      setLoading(false);
+    }, 1000);
   }, [category, setSelectedCategories]);
-
-
 
   let filteredProducts = products;
 
-
   if (selectedCategories.length > 0) {
-    filteredProducts = filteredProducts.filter((product) => selectedCategories.includes(product.category));
+    filteredProducts = filteredProducts.filter((product) =>
+      selectedCategories.includes(product.category)
+    );
   }
   filteredProducts = filteredProducts.filter(
-    (product) => product.rating.rate >= Number(ratingValue));
-  filteredProducts.filter((product) =>
-    searchTerm === "" || product.title.toLowerCase().includes(searchTerm.toLowerCase()))
+    (product) => product.rating.rate >= Number(ratingValue)
+  );
+  filteredProducts = filteredProducts.filter((product) =>
+    searchTerm === "" || product.title.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  if (sorting === 'highToLow') {
+  if (sorting === "highToLow") {
     filteredProducts = filteredProducts.sort((a, b) => b.price - a.price);
-  } else if (sorting === 'lowToHigh') {
+  } else if (sorting === "lowToHigh") {
     filteredProducts = filteredProducts.sort((a, b) => a.price - b.price);
   }
-  if (products.length === 0) return <Loader />
+
+  if (products.length === 0) return <Loader />;
+
   return (
     <>
-
       <Header />
-      {
-        loading ? <div className="loader"></div> :
-      <>
-      <SideNav />
-      <div className='product-container' >
-        <Filters className='filter-container' />
-        <Container sx={{ py: 8, display: showSidenav ? 'none' : 'block' }}
-         maxWidth="lg" className="display-product" >
-          <h3 style={{marginBottom:'10px'}}>Showing Total Products : <h4>({filteredProducts.length} products)</h4></h3>
-          <Grid container spacing={4}>
-            {filteredProducts.filter((product) =>
-              searchTerm === "" || product.title.toLowerCase()
-              .includes(searchTerm.toLowerCase()))
-              .map((product) => (
-                <>
-                  <ProductContainer product={product} />
-                </>
-              ))}
-          </Grid>
-        </Container>
-      </div>
-      </>
-}
+      {loading ? (
+        <Loader />
+      ) : (
+        <>
+          <SideNav />
+          <div className="product-container">
+            <Filters className="filter-container" />
+            <Container
+              sx={{ py: 8, display: showSidenav ? "none" : "block" }}
+              maxWidth="lg"
+              className="display-product"
+            >
+              <div style={{marginBottom:'5px'}}><h4>Total Products:</h4> <h5>({filteredProducts.length} products)</h5></div>
+              <Grid container spacing={4}>
+                {filteredProducts.map((product) => (
+                  <ProductContainer key={product.id} product={product} />
+                ))}
+              </Grid>
+            </Container>
+          </div>
+        </>
+      )}
     </>
-  )
-
+  );
 }
 
-export default ProductPage 
+export default ProductPage;
+

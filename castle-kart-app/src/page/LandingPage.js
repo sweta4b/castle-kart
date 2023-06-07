@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import Loader from '../component/Loader'
 import { AppContext } from '../contexts/AppContext'
 
 function LandingPage() {
@@ -17,7 +18,7 @@ function LandingPage() {
 
     return ( 
         <div>
-            {loading ? <div className='loader'></div> : 
+            {loading ? <Loader/> : 
             <>
             <div className="conatiner">
                 <div className="img-container">
