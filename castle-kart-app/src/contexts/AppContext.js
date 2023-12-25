@@ -141,6 +141,7 @@ export default function AppProvider({ children }) {
         setSearchTerm(event.target.value)
     }
 
+    //
     const showSearchedProduct = (event) => {
         setSearchTerm(searchTerm)
         navigate("/product")

@@ -22,6 +22,8 @@ function useProvideAuth() {
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
+  console.log(user)
+
   const [token, setToken] = useState(() => {
     const storedToken = localStorage.getItem("token");
     return storedToken ? storedToken: null;
