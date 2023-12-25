@@ -1,5 +1,5 @@
-import { useContext } from "react";
-import { useState, createContext, useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { useState, createContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -17,75 +17,77 @@ export const useAuth = () => useContext(AuthContext);
 function useProvideAuth() {
   const [user, setUser] = useState(() => {
     const storedUser = localStorage.getItem("user");
-    console.log(localStorage.getItem('user'))
-    console.log(storedUser)  
     return storedUser ? JSON.parse(storedUser) : null;
   });
 
-  console.log(user)
-
   const [token, setToken] = useState(() => {
     const storedToken = localStorage.getItem("token");
-    return storedToken ? storedToken: null;
+    return storedToken || null;
   });
 
   const navigate = useNavigate();
 
   const signUp = async (email, password, firstName, lastName) => {
-
     try {
       const response = await axios.post('/api/auth/signup', {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password
+        firstName,
+        lastName,
+        email,
+        password
       });
-      console.log(response.data)
       const { encodedToken, user } = response.data;
       setToken(encodedToken);
       setUser(user);
-      localStorage.setItem("token", encodedToken);
-      localStorage.setItem("user", JSON.stringify(user));
+      saveUserAndTokenToLocalStorage(user, encodedToken);
       navigate("/");
     } catch (error) {
-      console.error("Sign up failed", error);
-      throw new Error("Failed to sign up");
+      handleAuthError(error, "Failed to sign up");
     }
   };
 
   const signIn = async (email, password) => {
-
     try {
       const response = await axios.post('/api/auth/login', {
-        email: email,
-        password: password
+        email,
+        password
       });
-
       const { encodedToken, foundUser: user } = response.data;
 
       if (user && user.email === email) {
         setToken(encodedToken);
         setUser(user);
-        localStorage.setItem("token", encodedToken);
-        localStorage.setItem("user", JSON.stringify(user));
+        saveUserAndTokenToLocalStorage(user, encodedToken);
         navigate("/");
-        toast("Login successfully", {
+        toast("Login successful", {
           position: 'bottom-right',
           autoClose: 2000,
-      });
+        });
       } else {
         navigate("/login");
       }
     } catch (error) {
-      alert("Invalid email or password");
+      handleAuthError(error, "Invalid email or password");
     }
-    
   };
 
   const signOutUser = () => {
     setUser(null);
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+  };
+
+  const saveUserAndTokenToLocalStorage = (user, token) => {
+    localStorage.setItem("token", token);
+    localStorage.setItem("user", JSON.stringify(user));
+  };
+
+  const handleAuthError = (error, defaultMessage) => {
+    console.error("Authentication error:", error);
+    const errorMessage = error.response?.data?.message || defaultMessage;
+    toast(errorMessage, {
+      position: 'bottom-right',
+      autoClose: 2000,
+    });
   };
 
   useEffect(() => {
