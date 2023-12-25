@@ -29,7 +29,7 @@ function Checkout() {
                         <hr/>
                         <Typography sx={{textAlign:'center'}}><b>Order details</b></Typography>
                         <hr/>
-                        {cartItems.map(({title}) => <li style={{listStyle:'none'}}>{title}</li>)}
+                        {cartItems.map(({title}) => <li key={title} style={{listStyle:'none'}}>{title}</li>)}
                         <hr/>
                         <Typography sx={{ textAlign: 'center' }}><b>Price Details</b></Typography>
                         <hr />

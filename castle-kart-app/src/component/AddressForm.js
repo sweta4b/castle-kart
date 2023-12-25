@@ -18,7 +18,7 @@ export default function AddressForm() {
     <>
       {userAddress.length === 0 ? <Button onClick={() => navigate("/adress")}>Add New Address</Button> :
       userAddress.map((useraddress, index) => (
-        <div className="selectedAddress">
+        <div className="selectedAddress" key={index}>
           <label>
             <input type='radio' onChange={() => fillTheAddresForm(index)} name="name" /> {useraddress.firstName} {useraddress.lastName},
             {useraddress.address1}, {useraddress.address2},

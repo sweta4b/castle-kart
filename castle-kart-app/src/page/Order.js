@@ -35,7 +35,7 @@ function Order() {
       clearCart();
       clearCheckoutInformation();
     }
-  }, [activeStep, clearCart]);
+  }, [activeStep]);
 
   function handleNext() {
     isSelected ? 
@@ -47,6 +47,8 @@ function Order() {
   function handleBack() {
     setActiveStep(activeStep - 1);
   }
+
+  console.log(isSelected)
 
 
   return (
