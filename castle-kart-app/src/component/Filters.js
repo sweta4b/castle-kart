@@ -1,6 +1,7 @@
 
 import { Button } from '@mui/material'
 import React, { useContext } from 'react'
+
 import { AppContext } from '../contexts/AppContext'
 
 function Filters() {
@@ -18,12 +19,11 @@ function Filters() {
 
     return (
         <>
-        <div className='filter-bar'>
+        <div className=' h-[100vh] mt-20 rounded p-4 shadow-xl hidden md:block  border-2 '>
             <div className='innerFilter'>
-                <h2>Filters</h2>
-                <hr />
+                <h2 className='border-b text-xl font-bold'>Filters</h2>
                 <div className='priceFilter'>
-                    <h4>Sort by Price</h4>
+                    <h4 className='border-b text-lg font-bold'>Sort by Price</h4>
                     <label>
                         <input type="radio" value="lowToHigh"
                             checked={sorting === 'lowToHigh'}
@@ -40,9 +40,9 @@ function Filters() {
                           
                     </label>
                 </div>
-                <hr />
+                
                 <div className='categoryFilter'>
-                    <h4>Filter by category</h4>
+                    <h4 className='border-b text-lg font-bold'>Filter by category</h4>
                     {
                         categories.map(({ category, _id }) => (
                             <label key={_id}><input value={category}
@@ -54,12 +54,12 @@ function Filters() {
                         ))
                     }
                 </div>
-                <hr />
+                
                 <div className='ratingFilter'>
-                    <h4>Filter by rating</h4>
+                    <h4 className='border-b text-lg font-bold'>Filter by rating</h4>
                     <input type='range' min='0' max='5' step='0.2' value={ratingValue} onChange={(event) => handleRating(event)} />
                 </div>
-                <hr />
+                
                 <Button onClick={clearFilters} sx={{ color: 'black' }}>Clear Filters</Button>
             </div>
         </div>
