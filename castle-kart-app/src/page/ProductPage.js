@@ -9,12 +9,14 @@ import Filters from "../component/Filters";
 import ProductContainer from "../component/ProductContainer";
 import Loader from "../component/Loader";
 import { useParams } from "react-router-dom";
+
 import SideNav from "../component/SideNav";
 
 
 function ProductPage() {
   const { category } = useParams();
   const [loading, setLoading] = useState(true);
+  
   const {
     selectedCategories,
     sorting,
@@ -24,6 +26,8 @@ function ProductPage() {
     ratingValue,
     showSidenav
   } = useContext(AppContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 4;
 
   useEffect(() => {
     if (category) {
@@ -33,6 +37,7 @@ function ProductPage() {
       setLoading(false);
     }, 1000);
   }, [category, setSelectedCategories]);
+
 
   let filteredProducts = products;
 
@@ -56,6 +61,17 @@ function ProductPage() {
 
   if (products.length === 0) return <Loader />;
 
+  const handlePageChange = (newPage) => {
+    console.log(newPage)
+    setCurrentPage(newPage);
+  };
+
+  console.log(currentPage)
+
+  const startIndex = (currentPage - 1) * itemsPerPage
+  const endIndex = startIndex + itemsPerPage
+  // const productsToShow = filteredProducts.slice(startIndex, endIndex)
+
   return (
     <>
       <Header />
@@ -63,26 +79,54 @@ function ProductPage() {
         <Loader />
       ) : (
         <>
-          <SideNav />
-          <div className="product-container">
-            <Filters className="filter-container" />
+          {/* <SideNav /> */}
+          
+          <div className="product-container md:max-w-[1480px] max-w-[600px]  m-auto w-full h-full">
+            <div className="filter-container">
+            <Filters />
+            </div>
             <Container
-              sx={{ py: 8, display: showSidenav ? "none" : "block" }}
-              maxWidth="lg"
-              className="display-product"
+             
+              sx={{ py: 8}}
+              // maxWidth="lg"
+              className="display-product "
             >
-              <div style={{marginBottom:'5px'}}><h4>Total Products:</h4> <h5>({filteredProducts.length} products)</h5></div>
+              <div style={{ marginBottom: '5px' }}><h4>Total Products: {filteredProducts.length}</h4></div>
               <Grid container spacing={4}>
                 {filteredProducts.map((product) => (
                   <ProductContainer key={product.id} product={product} />
                 ))}
               </Grid>
+               {/* <Pagination handlePageChange={handlePageChange} currentPage={currentPage} filteredProducts={filteredProducts} itemsPerPage={itemsPerPage} /> */}
             </Container>
           </div>
+          
         </>
       )}
     </>
   );
+}
+
+const Pagination = ({handlePageChange,currentPage, filteredProducts, itemsPerPage }) => {
+  return (
+    <div style={{display:'flex', justifyContent:'center', alignItems:'center', marginTop:'20px'}}>
+      <button style={{width:'40px', height:'40px', borderRadius:'50%', backgroundColor: 'brown', color:'white'}}
+        onClick={() => handlePageChange(currentPage - 1)}
+        disabled={currentPage === 1}
+      >
+        prev
+      </button>
+      <span>{currentPage} of {Math.ceil(filteredProducts.length / itemsPerPage)}</span>
+
+      <button style={{width:'40px', height:'40px', borderRadius:'50%', backgroundColor: 'brown', color:'white'}}
+        onClick={() => handlePageChange(currentPage + 1)}
+        disabled={currentPage === Math.ceil(filteredProducts.length / itemsPerPage)}
+      >
+        next
+      </button>
+
+    </div>
+  )
 }
 
 export default ProductPage;
