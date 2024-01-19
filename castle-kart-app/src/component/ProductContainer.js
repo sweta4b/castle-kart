@@ -1,13 +1,16 @@
 import { ShoppingCartSharp } from '@mui/icons-material'
 import { Button, Card, CardActions, CardContent, CardMedia, Grid, IconButton, Rating, Typography, useTheme } from '@mui/material'
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import { useNavigate } from 'react-router-dom';
 import { AppContext } from '../contexts/AppContext';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import SideNav from './SideNav';
+
 
 
 function ProductContainer({ product }) {
-
+    const [isFilterOpen, setIsFilterOpen] = useState(false)
     const navigate = useNavigate();
     const theme = useTheme();
     const {
@@ -23,6 +26,11 @@ function ProductContainer({ product }) {
     }
 
     return (
+        <>
+        {isFilterOpen && <SideNav isFilterOpen={isFilterOpen} setIsFilterOpen={setIsFilterOpen}/>}
+        <div className=' md:hidden bg-red-800 p-2 fixed right-5 bottom-20 mt-4 rounded-full text-white cursor-pointer'>
+        <FilterAltIcon sx={{fontSize:'40px'}} onClick={() => setIsFilterOpen(!isFilterOpen)}/>
+        </div>
         <Grid item key={product.id} xs={12} sm={6} md={3} >
             <Card className="card"
                 sx={{ height: "100%", display: "flex", flexDirection: "column",
@@ -39,6 +47,7 @@ function ProductContainer({ product }) {
                         height: theme.spacing(20),
                         objectFit: "contain",
                         pt: theme.spacing(),
+                        transition: 'transform 0.5s ease-in-out',
                         "&": {
                             ":hover" : {
                                 transform: 'scale(1.2, 1.2) ',
@@ -67,7 +76,7 @@ function ProductContainer({ product }) {
                     <Typography paragraph fontSize="snall">
                         <b>$ {product.price}</b> 
                     </Typography>
-                    <Rating readOnly precision={0.5} value={product.rating.rate} sx={{zIndex: 1000}}/>
+                    <Rating readOnly precision={0.5} value={product.rating.rate} />
                 </CardContent>
                 <CardActions sx={{
                     alignSelf: "center",
@@ -102,6 +111,7 @@ function ProductContainer({ product }) {
                 </CardActions>
             </Card>
         </Grid>
+       </>
     )
 }
 

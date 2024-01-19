@@ -52,6 +52,7 @@ function useProvideAuth() {
         email,
         password
       });
+      console.log(response)
       const { encodedToken, foundUser: user } = response.data;
 
       if (user && user.email === email) {
